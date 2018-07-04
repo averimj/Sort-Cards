@@ -1,28 +1,40 @@
-require ".lib/deck"
-require ".lib/card"
-require ".guess"
+require "./lib/deck"
+require "./lib/card"
+require "./lib/guess"
 
-
-class Round.new
+class Round
   attr_accessor :deck,
                 :guesses,
                 :current_card,
                 :record_guess,
                 :feedback,
                 :number_correct,
-                :guesses_last_feedback,
-                :percent_correct
+                :percent_correct,
+                :round
 
   def initialize(deck)
     @deck = deck
-    @guesses = guesses
+    @guesses = []
     @current_card = current_card
-    @record_guess = record_guess
     @feedback = feedback
     @number_correct = number_correct
-    @guesses_last_feedback = guesses_last_feedback
     @percent_correct = percent_correct
+    @round = round
   end
-end
 
-round = Round.new(deck)
+  def current_card
+    @deck.cards.first
+  end
+
+  def record_guess(hash)
+  guess_string = "#{hash[:value]} of #{hash[:suit]}"
+  guess = Guess.new(guess_string, current_card)
+  @guesses << guess
+  guess
+  end
+
+  def count_guesses
+    @round.guesses.count
+  end
+  
+end
