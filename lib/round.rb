@@ -1,9 +1,8 @@
-require ".lib/deck"
-require ".lib/card"
-require ".guess"
+require "./lib/deck"
+require "./lib/card"
+require "./lib/guess"
 
-
-class Round.new
+class Round
   attr_accessor :deck,
                 :guesses,
                 :current_card,
@@ -24,5 +23,3 @@ class Round.new
     @percent_correct = percent_correct
   end
 end
-
-round = Round.new(deck)
